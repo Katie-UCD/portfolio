@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katie Flynn — Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #1a1410;
+      --paper:   #f5f0e8;
+      --teal:    #2a7c6f;
+      --teal-lt: #c8deda;
+      --rust:    #c4622d;
+      --mid:     #6b6157;
+      --line:    #d4cfc6;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAIN OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.6;
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 36px 0 32px;
+      border-bottom: 1px solid var(--line);
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--teal);
+    }
+
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--line);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    /* ── MAIN ── */
+    main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: center;
+      padding: 80px 0;
+    }
+
+    /* ── LEFT COLUMN ── */
+    .left {
+      padding-right: 80px;
+      border-right: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 24px;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+      animation: fadeUp 0.9s 0.3s ease both;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--mid);
+      margin-bottom: 48px;
+      line-height: 1.5;
+      animation: fadeUp 0.9s 0.4s ease both;
+    }
+
+    .body-copy {
+      font-size: 1rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--mid);
+      max-width: 420px;
+      margin-bottom: 48px;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+
+    .body-copy strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* ── CTA ── */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s 0.6s ease both;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--teal);
+      transform: translateY(-2px);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mid);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+
+    .btn-link:hover { color: var(--teal); }
+
+    .btn-link svg {
+      transition: transform 0.2s ease;
+    }
+
+    .btn-link:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ── RIGHT COLUMN ── */
+    .right {
+      padding-left: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      animation: fadeUp 0.9s 0.5s ease both;
+    }
+
+    /* Big typographic number */
+    .big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(7rem, 14vw, 13rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--teal-lt);
+      user-select: none;
+      margin-bottom: -20px;
+    }
+
+    .big-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 48px;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .stat {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stat:nth-child(odd) {
+      border-right: 1px solid var(--line);
+      padding-right: 32px;
+    }
+
+    .stat:nth-child(even) {
+      padding-left: 32px;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      text-transform: uppercase;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 14px 0;
+      margin: 0 -48px;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marquee 28s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: 0 40px;
+    }
+
+    .marquee-item::after {
+      content: '✦';
+      color: var(--teal);
+      font-size: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0 36px;
+      border-top: 1px solid var(--line);
+      animation: fadeUp 1s 0.9s ease both;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-size: 0.75rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--teal); }
+
+    /* ── DECORATIVE LINE ── */
+    .deco-line {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100vh;
+      background: linear-gradient(to bottom, transparent, var(--line) 20%, var(--line) 80%, transparent);
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .page { padding: 0 24px; }
+
+      main {
+        grid-template-columns: 1fr;
+        padding: 52px 0;
+        gap: 52px;
+      }
+
+      .left {
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 52px;
+      }
+
+      .right {
+        padding-left: 0;
+      }
+
+      .big-num { font-size: 7rem; }
+
+      .stats { grid-template-columns: 1fr 1fr; }
+
+      .marquee-wrap { margin: 0 -24px; }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 3rem; }
+      .stats { grid-template-columns: 1fr; }
+      .stat:nth-child(odd) { border-right: none; padding-right: 0; }
+      .stat:nth-child(even) { padding-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deco-line"></div>
+
+  <div class="page">
+
+    <!-- HEADER -->
+    <header>
+      <a class="logo" href="#">Katie <span>Flynn</span></a>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        Currently rebuilding
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+      <!-- LEFT -->
+      <div class="left">
+        <p class="eyebrow">Portfolio — Under Construction</p>
+
+        <h1>Currently<br>in <em>wire-<br>frame.</em></h1>
+
+        <p class="subtitle">Every good design goes through<br>a messy middle. This is mine.</p>
+
+        <p class="body-copy">
+          I'm <strong>Katie Flynn</strong> — a Strategic Brand & UX Designer with 10+ years 
+          building visual identities, design systems, and digital experiences 
+          for some of Ireland's biggest brands.<br><br>
+          This site is getting the redesign it deserves. 
+          Back soon — <strong>promise</strong>.
+        </p>
+
+        <div class="cta-row">
+          <a href="mailto:katieaflynn2@gmail.com" class="btn-primary">Get in touch</a>
+          <a href="https://linkedin.com/in/katieflynn2" class="btn-link" target="_blank">
+            View LinkedIn
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="right">
+        <div class="big-num">10</div>
+        <p class="big-label">Years of experience</p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-num">7+</div>
+            <div class="stat-label">Industry Awards</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">EBS</div>
+            <div class="stat-label">Brand Systems</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">AIB</div>
+            <div class="stat-label">Campaign Design</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">GAA</div>
+            <div class="stat-label">Sponsorship</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <!-- two copies for seamless loop -->
+        <span class="marquee-item">Brand Identity</span>
+        <span class="marquee-item">Design Systems</span>
+        <span class="marquee-item">Motion Design</span>
+        <span class="marquee-item">UX & Product Design</span>
+        <span class="marquee-item">Front-End Development</span>
+        <span class="marquee-item">Art Direction</span>
+        <span class="marquee-item">Social Media</span>
+        <span class="marquee-item">Sponsorship Campaigns</span>
+        <span class="marquee-item">Brand Identity</span>
+        <span class="marquee-item">Design Systems</span>
+        <span class="marquee-item">Motion Design</span>
+        <span class="marquee-item">UX & Product Design</span>
+        <span class="marquee-item">Front-End Development</span>
+        <span class="marquee-item">Art Direction</span>
+        <span class="marquee-item">Social Media</span>
+        <span class="marquee-item">Sponsorship Campaigns</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <p class="footer-left">© 2026 Katie Flynn · Dublin, Ireland</p>
+      <nav class="footer-links">
+        <a href="mailto:katieaflynn2@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/katieflynn2" target="_blank">LinkedIn</a>
+        <a href="https://katieflynndesign.com">Portfolio</a>
+      </nav>
+    </footer>
+
+  </div>
+
+</body>
+</html>
