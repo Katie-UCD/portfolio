@@ -857,7 +857,7 @@
     <div class="about-left reveal">
       <p class="section-tag" style="margin-bottom:2.5rem">About</p>
       <p>I build systems that make <em>complex things feel simple</em> — and good design repeatable.</p>
-      <p>Ten years across design systems, marketplace UX, brand strategy, and front-end development at consumer-facing companies. I care about craft, and I care about whether it actually works.</p>
+      <p>I've spent ten years learning that the best solutions come from understanding the whole problem, not just the design brief.</p>
       <p>Based in Dublin. Open to hybrid and remote product design roles at <em>consumer tech companies.</em></p>
     </div>
     <div class="about-right reveal reveal-d1">
@@ -885,21 +885,13 @@
       <p class="contact-note">Open to Product Designer and Strategic Brand Designer roles in Dublin or remote. Hybrid preferred. Not looking for fixed-term contracts or agency work.</p>
     </div>
     <div class="contact-right reveal reveal-d1">
-      <a class="contact-link" href="/cdn-cgi/l/email-protection#dbb0baafb2bebabdb7a2b5b5e99bbcb6bab2b7f5b8b4b6">
-        <div class="contact-link-inner"><span class="cl-label">Email</span><span class="cl-value"><span class="__cf_email__" data-cfemail="e883899c818d898e84918686daa88f85898184c68b8785">[email&#160;protected]</span></span></div>
+      <a class="contact-link" href="mailto:katieflynndesign@gmail.com">
+        <div class="contact-link-inner"><span class="cl-label">Email</span><span class="cl-value"><span class="__cf_email__" data-cfemail="katieflynndesign@gmail.com">kateiflynndesign@gmail.com</span></span></div>
         <span class="cl-arrow">→</span>
       </a>
       <a class="contact-link" href="https://linkedin.com/in/katieflynn2" target="_blank" rel="noopener">
         <div class="contact-link-inner"><span class="cl-label">LinkedIn</span><span class="cl-value">linkedin.com/in/katieflynn2</span></div>
         <span class="cl-arrow">→</span>
-      </a>
-      <a class="contact-link" href="tel:0857525671">
-        <div class="contact-link-inner"><span class="cl-label">Phone</span><span class="cl-value">085 752 5671</span></div>
-        <span class="cl-arrow">→</span>
-      </a>
-      <a class="contact-link" href="Katie_Flynn_CV.pdf" target="_blank">
-        <div class="contact-link-inner"><span class="cl-label">CV</span><span class="cl-value">Download PDF</span></div>
-        <span class="cl-arrow">↓</span>
       </a>
     </div>
   </div>
@@ -957,4 +949,12 @@
 
     /* Live Dublin time */
     const timeEl = document.getElementById('live-time');
-    func
+    function tick() {
+      timeEl.textContent = 'Dublin · ' + new Date().toLocaleTimeString('en-IE', {
+        timeZone: 'Europe/Dublin', hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
+</body>
+</html>
