@@ -1,95 +1,95 @@
-# katieflynndesign.com — Holding Page
+# Katie Flynn — Portfolio Site
 
-A minimal, editorial holding page for [katieflynndesign.com](https://katieflynndesign.com) while the portfolio is being rebuilt.
+Personal portfolio for Katie Flynn, Product Designer and Front-End Developer based in Dublin, Ireland.
 
----
-
-## About
-
-This page serves as a temporary landing page for Katie Flynn's portfolio site. It communicates availability for work, links to LinkedIn, and gives visitors a sense of design sensibility while the full portfolio is under construction.
+Live at: [katieflynndesign.com](https://katieflynndesign.com)
 
 ---
 
-## Built With
+## Overview
 
-- Vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies
-- [Playfair Display](https://fonts.google.com/specimen/Playfair+Display) — Google Fonts
-- [DM Sans](https://fonts.google.com/specimen/DM+Sans) — Google Fonts
-- Hosted on GitHub Pages
+A hand-coded portfolio site built with pure HTML, CSS and vanilla JavaScript. No frameworks, no build tools, no dependencies. Every file opens directly in a browser.
 
----
-
-## Features
-
-- Fully responsive (mobile, tablet, desktop)
-- Staggered entrance animations on load
-- Scrolling skills marquee
-- Grain texture overlay for depth
-- No build step required — single `.html` file
+The site showcases five case studies across product design, brand identity, design systems, motion design and front-end development.
 
 ---
 
-## Local Development
+## Structure
 
-No setup needed. Just open `index.html` in your browser:
-
-```bash
-open index.html
+```
+katieflynndesign/
+├── index.html                  # Homepage
+├── boi.html                    # Bank of Ireland Marketing Hub
+├── ebs.html                    # EBS Social Media Design System
+├── daily-divination.html       # Daily Divination web app
+├── toughest-5km.html           # The Toughest 5km (AIB x GAA)
+├── weirdstock.html             # Weirdstock brand identity
+├── README.md
+└── images/
+    └── (all images and videos)
 ```
 
-Or clone the repo:
+---
 
-```bash
-git clone https://github.com/yourusername/katieflynndesign.com.git
-cd katieflynndesign.com
-open index.html
-```
+## Case Studies
+
+**Bank of Ireland Marketing Hub** (2015–2017)
+Self-service e-commerce platform for 200+ branch staff. Replaced a broken ad hoc ordering process. 60% faster ordering, 100% adoption at launch.
+
+**EBS Social Media Design System** (2020–Present)
+Motion identity built from letterform geometry. 50+ After Effects templates. 3x production speed. Best Instagram Brand at Social Media Awards 2021 and 2022.
+
+**Daily Divination** (2024–2025)
+Unified spiritual wellness platform — tarot, astrology, moon phases and numerology. Final project for a Professional Certificate in Front-End Web Design. Built in AstroJS and deployed to GitHub Pages.
+
+**The Toughest 5km** (2020)
+GAA-based run tracker designed for AIB during the first COVID lockdown. Full product concept including brand identity, app UX, and 12 custom Celtic-illustrated achievement badges. Never built due to COVID priorities.
+
+**Weirdstock** (Brand Identity)
+Logo and animated identity for a UK luxury bedding brand. Live and trading on Shopify. Featured at Chelsea Flower Show, Reclaim Magazine and Homestyle Magazine.
+
+---
+
+## Design System
+
+**Typography**
+- Display: Archivo Black (Google Fonts)
+- Serif: Cormorant Garamond (Google Fonts)
+- Body: DM Sans (Google Fonts)
+
+**Colours**
+- Ink: `#272226`
+- Paper: `#f7f4f0`
+- Accent: `#006268`
+- Muted: `#9a9590`
+
+Each case study has its own project colour pulled from the actual work.
+
+---
+
+## Technical Notes
+
+Built with pure HTML, CSS and vanilla JavaScript. No frameworks or build steps required.
+
+Features include scroll-triggered reveal animations using IntersectionObserver, CSS custom properties for consistent theming, a custom cursor, live Dublin time in the footer, animated stat counters, and autoplay looping video for motion work.
+
+All animations are progressively enhanced — content is fully visible without JavaScript, animations layer on top when JS is available.
+
+Fonts are loaded via Google Fonts. All other assets are self-hosted in the `images/` directory.
 
 ---
 
 ## Deployment
 
-Hosted via **GitHub Pages** with a custom domain connected through Bluehost DNS.
+The site is deployed via GitHub Pages. To update, commit changes to the `main` branch and GitHub Pages will redeploy automatically.
 
-DNS records in Bluehost point to:
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
-
-CNAME `www` points to `yourusername.github.io`
-
-Custom domain set in **GitHub → Settings → Pages → Custom Domain**.
-
----
-
-## Updating the Page
-
-Since this is a single file, all edits are made directly in `index.html`:
-
-- **Copy/text** — search for the text you want to change and edit inline
-- **Colours** — all colours are CSS variables at the top of the `<style>` block
-- **Skills marquee** — find the `marquee-item` spans and add/remove skills
-- **Stats** — find the `stat` divs in the right column and update clients/numbers
-
----
-
-## Replacing With Full Portfolio
-
-When the full portfolio is ready:
-
-1. Delete `index.html` from this repo
-2. Upload the new portfolio files
-3. If moving back to Adobe Portfolio or another platform, update DNS records in Bluehost accordingly
-4. Remove the custom domain from GitHub Pages settings before pointing DNS elsewhere
+To run locally, open any HTML file directly in a browser. No server or build step required.
 
 ---
 
 ## Contact
 
-**Katie Flynn**
-- Email: katieaflynn2@gmail.com
-- LinkedIn: [linkedin.com/in/katieflynn2](https://linkedin.com/in/katieflynn2)
-- Portfolio: [katieflynndesign.com](https://katieflynndesign.com)
+Katie Flynn
+katieaflynn2@gmail.com
+linkedin.com/in/katieflynn2
+Dublin, Ireland
