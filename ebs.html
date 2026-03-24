@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EBS Social Media Design System · Katie Flynn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.ico">
+  <style>
+    :root {
+      --ink:       #272226;
+      --paper:     #f7f4f0;
+      --muted:     #9a9590;
+      --line:      rgba(39,34,38,0.10);
+      --accent:    #006268;
+      --project:   #1a0a00;
+      --project-2: #c0301a;
+      --f-display: 'Archivo Black', sans-serif;
+      --f-serif:   'Cormorant Garamond', serif;
+      --f-body:    'DM Sans', sans-serif;
+      --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper); color: var(--ink);
+      font-family: var(--f-body); font-weight: 300;
+      overflow-x: hidden; -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; width: 100%; }
+
+    /* ─── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.75rem 3rem; background: var(--paper);
+      border-bottom: 1px solid transparent;
+      transition: border-color .3s ease, padding .3s ease;
+    }
+    nav.scrolled { border-bottom-color: var(--line); padding: 1.1rem 3rem; }
+    .nav-logo { font-family: var(--f-display); font-size: 0.85rem; letter-spacing: 0.06em; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); position: relative; transition: color .2s;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width .3s var(--ease-expo);
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::after { width: 100%; }
+
+    /* ─── HERO ────────────────────────────────────────────────── */
+    .cs-hero {
+      min-height: 100svh;
+      background: var(--project);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 3rem 4rem;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    /* Animated concentric circles in hero */
+    .hero-rings {
+      position: absolute; right: -10vw; top: 50%;
+      transform: translateY(-50%);
+      width: 70vw; height: 70vw;
+      pointer-events: none;
+    }
+    .hero-rings circle {
+      fill: none; stroke: rgba(192,48,26,0.12); stroke-width: 1;
+      transform-origin: center;
+    }
+    .hero-rings circle:nth-child(1) { r: 45%; stroke: rgba(192,48,26,0.08); }
+    .hero-rings circle:nth-child(2) { r: 37%; stroke: rgba(192,48,26,0.12); }
+    .hero-rings circle:nth-child(3) { r: 29%; stroke: rgba(192,48,26,0.18); }
+    .hero-rings circle:nth-child(4) { r: 21%; stroke: rgba(192,48,26,0.28); }
+    .hero-rings circle:nth-child(5) { r: 13%; stroke: rgba(192,48,26,0.45); stroke-width: 1.5; }
+    .hero-rings circle:nth-child(6) { r: 5%;  fill: rgba(192,48,26,0.7); stroke: none; }
+
+    .cs-hero-back {
+      position: absolute; top: 6rem; left: 3rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); transition: color .2s;
+    }
+    .cs-hero-back:hover { color: rgba(255,255,255,0.85); }
+
+    .cs-hero-index {
+      font-family: var(--f-display);
+      font-size: clamp(6rem, 18vw, 20rem);
+      line-height: 1; color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.06);
+      position: absolute; right: 2rem; bottom: 3rem;
+      pointer-events: none; user-select: none;
+    }
+
+    .cs-hero-eyebrow {
+      font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(10px);
+      animation: fadeUp .5s var(--ease-expo) .2s forwards;
+    }
+    .cs-hero-title {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 6vw, 7rem);
+      line-height: 0.93; letter-spacing: -0.02em; color: #fff; max-width: 800px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp .8s var(--ease-expo) .35s forwards;
+    }
+    .cs-hero-title .accent { color: var(--project-2); }
+    .cs-hero-footer {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-top: 3rem; gap: 2rem;
+      opacity: 0; animation: fadeUp .6s var(--ease-expo) .6s forwards;
+    }
+    .cs-hero-summary {
+      font-family: var(--f-serif); font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.3rem);
+      line-height: 1.5; color: rgba(255,255,255,0.65); max-width: 480px;
+    }
+    .cs-hero-meta { display: flex; gap: 2.5rem; flex-shrink: 0; }
+    .cs-meta-item { display: flex; flex-direction: column; gap: .25rem; text-align: right; }
+    .cs-meta-label { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .cs-meta-value { font-size: 0.82rem; font-weight: 500; color: rgba(255,255,255,0.8); }
+
+    /* ─── SECTION UTILITY ─────────────────────────────────────── */
+    .cs-section-tag {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .cs-section-tag::after {
+      content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--accent);
+    }
+
+    /* ─── OVERVIEW ────────────────────────────────────────────── */
+    .cs-overview {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-overview-left { padding: 5rem 3rem; border-right: 1px solid var(--line); }
+    .cs-overview-left h2 {
+      font-family: var(--f-serif); font-weight: 300; font-style: italic;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem); line-height: 1.25; margin-bottom: 2rem;
+    }
+    .cs-overview-left h2 strong { font-style: normal; font-weight: 600; }
+    .cs-overview-left p { font-size: 0.95rem; line-height: 1.8; color: #4a4448; margin-bottom: 1.25rem; }
+    .cs-overview-right { padding: 5rem 3rem; display: flex; flex-direction: column; gap: 2rem; }
+    .cs-detail-block h3 {
+      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 0.75rem;
+    }
+    .cs-detail-block p { font-size: 0.88rem; line-height: 1.65; color: #4a4448; }
+    .cs-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .cs-tag {
+      font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); border: 1px solid var(--line); padding: 0.3rem 0.6rem;
+    }
+
+    /* ─── THREE COL ───────────────────────────────────────────── */
+    .cs-three-col {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-col { padding: 4rem 3rem; border-right: 1px solid var(--line); }
+    .cs-col:last-child { border-right: none; }
+    .cs-col-num {
+      font-family: var(--f-display); font-size: 0.75rem;
+      letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1.5rem; display: block;
+    }
+    .cs-col h3 { font-family: var(--f-display); font-size: 1.4rem; line-height: 1; margin-bottom: 1.25rem; }
+    .cs-col p { font-size: 0.88rem; line-height: 1.75; color: #4a4448; }
+
+    /* ─── FULL IMAGE / CAPTION ────────────────────────────────── */
+    .cs-image-full { border-bottom: 1px solid var(--line); overflow: hidden; }
+    .cs-image-full img { width: 100%; display: block; transition: transform .8s var(--ease-expo); }
+    .cs-image-full:hover img { transform: scale(1.02); }
+    .cs-image-caption {
+      padding: 1rem 3rem; font-size: 0.7rem; letter-spacing: 0.08em;
+      color: var(--muted); border-bottom: 1px solid var(--line);
+      display: flex; justify-content: space-between;
+    }
+
+    /* ─── VIDEO GRID ──────────────────────────────────────────── */
+    .cs-video-hero {
+      border-bottom: 1px solid var(--line);
+      background: var(--project);
+      overflow: hidden; position: relative;
+    }
+    .cs-video-hero video {
+      width: 100%; display: block; max-height: 80vh; object-fit: cover;
+    }
+
+    .cs-video-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--line);
+      background: var(--ink);
+    }
+    .cs-video-cell {
+      position: relative; overflow: hidden;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      aspect-ratio: 1;
+    }
+    .cs-video-cell:last-child { border-right: none; }
+    .cs-video-cell video {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .cs-video-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      background: linear-gradient(transparent, rgba(0,0,0,0.6));
+    }
+
+    /* Two video side by side */
+    .cs-video-duo {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+      background: var(--ink);
+    }
+    .cs-video-duo .cs-video-cell {
+      aspect-ratio: 1; border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .cs-video-duo .cs-video-cell:last-child { border-right: none; }
+
+    /* ─── SYSTEM BREAKDOWN ────────────────────────────────────── */
+    .cs-system {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-system-left { padding: 5rem 3rem; border-right: 1px solid var(--line); }
+    .cs-system-left h2 {
+      font-family: var(--f-serif); font-weight: 300; font-style: italic;
+      font-size: clamp(1.4rem, 2.2vw, 2rem); line-height: 1.25; margin-bottom: 2rem;
+    }
+    .cs-system-left p { font-size: 0.88rem; line-height: 1.75; color: #4a4448; margin-bottom: 1.25rem; }
+    .cs-system-right { padding: 5rem 3rem; display: flex; flex-direction: column; gap: 0; }
+    .cs-system-item {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.5rem 0; border-bottom: 1px solid var(--line);
+    }
+    .cs-system-item:last-child { border-bottom: none; }
+    .cs-system-num {
+      font-family: var(--f-display); font-size: 0.72rem;
+      color: var(--project-2); flex-shrink: 0; padding-top: 2px;
+    }
+    .cs-system-text h4 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.35rem; }
+    .cs-system-text p { font-size: 0.82rem; line-height: 1.6; color: var(--muted); }
+
+    /* ─── AWARDS ──────────────────────────────────────────────── */
+    .cs-awards {
+      background: var(--ink);
+      border-bottom: 1px solid var(--line);
+      padding: 5rem 3rem;
+    }
+    .cs-awards .cs-section-tag { color: rgba(255,255,255,0.4); }
+    .cs-awards .cs-section-tag::after { background: var(--project-2); }
+    .cs-awards-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 1rem;
+    }
+    .cs-award-item {
+      padding: 2rem; border: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .cs-award-year {
+      font-family: var(--f-display); font-size: 0.72rem;
+      letter-spacing: 0.1em; color: var(--project-2);
+    }
+    .cs-award-name { font-size: 0.95rem; font-weight: 500; color: #fff; line-height: 1.3; }
+    .cs-award-body { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 0.25rem; }
+
+    /* ─── QUOTE ───────────────────────────────────────────────── */
+    .cs-quote {
+      padding: 6rem 3rem; border-bottom: 1px solid var(--line);
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+    }
+    .cs-quote blockquote {
+      font-family: var(--f-serif); font-style: italic;
+      font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+      line-height: 1.3; max-width: 700px; color: var(--ink); margin-bottom: 1.5rem;
+    }
+    .cs-quote cite {
+      font-size: 0.7rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); font-style: normal;
+    }
+
+    /* ─── OUTCOMES ────────────────────────────────────────────── */
+    .cs-outcomes {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-outcome { padding: 4rem 3rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 0.5rem; }
+    .cs-outcome:last-child { border-right: none; }
+    .cs-outcome-num { font-family: var(--f-display); font-weight: 800; font-size: clamp(2.5rem, 4.5vw, 4rem); line-height: 1; }
+    .cs-outcome-suffix { font-size: 0.6em; color: var(--accent); }
+    .cs-outcome-label { font-size: 0.78rem; line-height: 1.5; color: var(--muted); }
+
+    /* ─── NEXT PROJECT ────────────────────────────────────────── */
+    .cs-next {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--line);
+    }
+    .cs-next-left { padding: 5rem 3rem; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
+    .cs-next-label { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+    .cs-next-title { font-family: var(--f-display); font-size: clamp(2rem, 4vw, 4rem); line-height: 0.93; letter-spacing: -0.02em; }
+    .cs-next-link {
+      display: inline-flex; align-items: center; gap: 0.75rem;
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-top: 2rem;
+      transition: gap .3s var(--ease-expo);
+    }
+    .cs-next-link:hover { gap: 1.25rem; }
+    .cs-next-right { padding: 5rem 3rem; display: flex; flex-direction: column; justify-content: center; }
+    .cs-next-right p { font-family: var(--f-serif); font-style: italic; font-size: clamp(1rem, 1.6vw, 1.3rem); line-height: 1.5; color: #4a4448; }
+
+    /* ─── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--muted); }
+
+    /* ─── REVEAL ──────────────────────────────────────────────── */
+    .js-ready .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .8s var(--ease-expo), transform .8s var(--ease-expo);
+    }
+    .js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+    .js-ready .reveal-d1 { transition-delay: .1s; }
+    .js-ready .reveal-d2 { transition-delay: .2s; }
+
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 1.5rem; }
+      nav.scrolled { padding: 1.1rem 1.5rem; }
+      .cs-hero { padding: 0 1.5rem 3rem; }
+      .cs-hero-back { left: 1.5rem; }
+      .cs-hero-index { display: none; }
+      .hero-rings { width: 120vw; right: -30vw; opacity: 0.5; }
+      .cs-hero-footer { flex-direction: column; gap: 1.5rem; }
+      .cs-hero-meta { gap: 1.5rem; }
+      .cs-meta-item { text-align: left; }
+      .cs-overview { grid-template-columns: 1fr; }
+      .cs-overview-left { border-right: none; border-bottom: 1px solid var(--line); padding: 3rem 1.5rem; }
+      .cs-overview-right { padding: 3rem 1.5rem; }
+      .cs-three-col { grid-template-columns: 1fr; }
+      .cs-col { border-right: none; border-bottom: 1px solid var(--line); padding: 3rem 1.5rem; }
+      .cs-video-grid { grid-template-columns: 1fr 1fr; }
+      .cs-video-grid .cs-video-cell:last-child { display: none; }
+      .cs-video-duo { grid-template-columns: 1fr; }
+      .cs-video-duo .cs-video-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .cs-system { grid-template-columns: 1fr; }
+      .cs-system-left { border-right: none; border-bottom: 1px solid var(--line); padding: 3rem 1.5rem; }
+      .cs-system-right { padding: 3rem 1.5rem; }
+      .cs-awards { padding: 3rem 1.5rem; }
+      .cs-awards-grid { grid-template-columns: 1fr 1fr; }
+      .cs-outcomes { grid-template-columns: 1fr 1fr; }
+      .cs-outcome:nth-child(2) { border-right: none; }
+      .cs-outcome:nth-child(3) { grid-column: 1/-1; border-right: none; }
+      .cs-next { grid-template-columns: 1fr; }
+      .cs-next-left { border-right: none; border-bottom: 1px solid var(--line); padding: 3rem 1.5rem; }
+      .cs-next-right { padding: 3rem 1.5rem; }
+      .cs-image-caption { padding: 1rem 1.5rem; }
+      .cs-quote { padding: 4rem 1.5rem; }
+      footer { padding: 1.25rem 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .cs-awards-grid { grid-template-columns: 1fr; }
+      .cs-outcomes { grid-template-columns: 1fr; }
+      .cs-outcome { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">Katie Flynn</a>
+    <ul class="nav-links">
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <a href="index.html#work" class="cs-hero-back">← All Work</a>
+    <svg class="hero-rings" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="50" cy="50" r="45"/>
+      <circle cx="50" cy="50" r="37"/>
+      <circle cx="50" cy="50" r="29"/>
+      <circle cx="50" cy="50" r="21"/>
+      <circle cx="50" cy="50" r="13"/>
+      <circle cx="50" cy="50" r="5"/>
+    </svg>
+    <span class="cs-hero-index">02</span>
+    <p class="cs-hero-eyebrow">Case Study · Design Systems · Motion Design · 2020–Present</p>
+    <h1 class="cs-hero-title">EBS Social Media<br><span class="accent">Design System</span></h1>
+    <div class="cs-hero-footer">
+      <p class="cs-hero-summary">
+        A motion identity built from letterform geometry. 50+ templates that gave EBS a distinct digital presence and tripled content production speed.
+      </p>
+      <div class="cs-hero-meta">
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Role</span>
+          <span class="cs-meta-value">Solo Designer</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Timeline</span>
+          <span class="cs-meta-value">2020–Present</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="cs-meta-label">Tools</span>
+          <span class="cs-meta-value">After Effects · Illustrator · Photoshop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO VIDEO -->
+  <div class="cs-video-hero">
+    <video autoplay muted loop playsinline>
+      <source src="images/205601 - EBS Transition Video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="cs-image-caption">
+    <span>EBS transition video. The motion system in action.</span>
+    <span>After Effects</span>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div class="cs-overview">
+    <div class="cs-overview-left reveal">
+      <div class="cs-section-tag">Overview</div>
+      <h2>EBS had a new brand identity. But <strong>nobody had defined how it should move.</strong></h2>
+      <p>When EBS refreshed their brand, the new guidelines were built entirely around out-of-home advertising. There was no digital visual language. No templates, no motion principles, no defined way for the brand to show up on social media.</p>
+      <p>The marketing team was producing content but it looked inconsistent. Different people making different things with no shared system behind them. Each post took around two hours to produce and there was no way to scale.</p>
+      <p>My job was to create that digital language from scratch; to take the EBS letterforms, colour palette and photography direction and build a motion system that could live on Instagram, be used by a team of non-specialists, and still look like one coherent brand.</p>
+    </div>
+    <div class="cs-overview-right reveal reveal-d1">
+      <div class="cs-detail-block">
+        <h3>My Role</h3>
+        <p>End-to-end design system ownership. Visual direction, motion design, template production, and handoff to an external agency and in-house marketing team.</p>
+      </div>
+      <div class="cs-detail-block">
+        <h3>Built For</h3>
+        <p>A mix of in-house designers and external social media agencies producing content day-to-day without always having a designer available.</p>
+      </div>
+      <div class="cs-detail-block">
+        <h3>Skills Used</h3>
+        <div class="cs-tags">
+          <span class="cs-tag">Design Systems</span>
+          <span class="cs-tag">Motion Design</span>
+          <span class="cs-tag">After Effects</span>
+          <span class="cs-tag">Brand Adaptation</span>
+          <span class="cs-tag">Illustrator</span>
+          <span class="cs-tag">Template Production</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THREE COL -->
+  <div class="cs-three-col">
+    <div class="cs-col reveal">
+      <span class="cs-col-num">Problem</span>
+      <h3>A brand with no digital voice.</h3>
+      <p>The existing brand guidelines were designed for print and out-of-home. There were no rules for how EBS should look or move on social media. Every post was being made from scratch, inconsistently, by different people.</p>
+    </div>
+    <div class="cs-col reveal reveal-d1">
+      <span class="cs-col-num">Approach</span>
+      <h3>Build the system, not just the assets.</h3>
+      <p>Rather than designing individual posts, I created a reusable motion system rooted in the EBS letterforms and brand geometry. The goal was templates anyone could use; design decisions already made, brand already locked in.</p>
+    </div>
+    <div class="cs-col reveal reveal-d2">
+      <span class="cs-col-num">Outcome</span>
+      <h3>3x faster. Two years of awards.</h3>
+      <p>Production time dropped from two hours per post to under 30 minutes. The system produced 200+ posts in its first six months. EBS won Best Instagram Brand at the Social Media Awards in 2021 and 2022.</p>
+    </div>
+  </div>
+
+  <!-- STATIC IMAGE -->
+  <div class="cs-image-full reveal">
+    <img src="images/EBS Social Static copy 2_v2.jpg" alt="EBS social media static post showing the motion system visual language" />
+  </div>
+  <div class="cs-image-caption">
+    <span>Static social post. The curved line motif and photography direction applied across the system.</span>
+    <span>Illustrator · Photoshop</span>
+  </div>
+
+  <!-- SYSTEM BREAKDOWN -->
+  <div class="cs-system">
+    <div class="cs-system-left reveal">
+      <div class="cs-section-tag">The System</div>
+      <h2>Every element was designed to be reusable, not just repeatable.</h2>
+      <p>The core visual idea came from the EBS letterforms themselves. The curves, the geometry, the weight of the letters, these became the raw material for the motion system. Circles, arcs, and sweeping lines were abstracted from the logo and turned into a flexible set of motion elements.</p>
+      <p>The photography direction was defined separately, giving the team clear rules on image style, cropping, and how to combine photography with the graphic layer.</p>
+    </div>
+    <div class="cs-system-right reveal reveal-d1">
+      <div class="cs-system-item">
+        <span class="cs-system-num">01</span>
+        <div class="cs-system-text">
+          <h4>Motion Templates</h4>
+          <p>50+ After Effects templates covering square, story, and landscape formats. Each one editable by a non-specialist in under 30 minutes.</p>
+        </div>
+      </div>
+      <div class="cs-system-item">
+        <span class="cs-system-num">02</span>
+        <div class="cs-system-text">
+          <h4>Static Templates</h4>
+          <p>Illustrator and Photoshop files for static posts, stories, and campaign graphics. Same visual language, no motion required.</p>
+        </div>
+      </div>
+      <div class="cs-system-item">
+        <span class="cs-system-num">03</span>
+        <div class="cs-system-text">
+          <h4>Letterform Geometry</h4>
+          <p>The E, B, and S letterforms were broken into component curves and shapes, becoming the building blocks of the motion system.</p>
+        </div>
+      </div>
+      <div class="cs-system-item">
+        <span class="cs-system-num">04</span>
+        <div class="cs-system-text">
+          <h4>Photography Direction</h4>
+          <p>Clear rules on image selection, colour treatment, and how photography sits within the graphic system.</p>
+        </div>
+      </div>
+      <div class="cs-system-item">
+        <span class="cs-system-num">05</span>
+        <div class="cs-system-text">
+          <h4>Animated Type System</h4>
+          <p>A consistent approach to how text enters, holds, and exits across all video content.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO GRID: three square videos -->
+  <div class="cs-video-grid">
+    <div class="cs-video-cell">
+      <video autoplay muted loop playsinline>
+        <source src="images/animated type_4.mp4" type="video/mp4">
+      </video>
+      <span class="cs-video-label">Animated Type System</span>
+    </div>
+    <div class="cs-video-cell">
+      <video autoplay muted loop playsinline>
+        <source src="images/EBS_icons.mp4" type="video/mp4">
+      </video>
+      <span class="cs-video-label">Icon Animation</span>
+    </div>
+    <div class="cs-video-cell">
+      <video autoplay muted loop playsinline>
+        <source src="images/CS25_0110 - EBS Fraud Assets Request  - Square_v2.mp4" type="video/mp4">
+      </video>
+      <span class="cs-video-label">Fraud Awareness Campaign</span>
+    </div>
+  </div>
+  <div class="cs-image-caption" style="background: var(--ink); color: rgba(255,255,255,0.35); border-bottom-color: rgba(255,255,255,0.06);">
+    <span>Motion templates in use. Each one produced using the design system.</span>
+    <span>After Effects</span>
+  </div>
+
+  <!-- INFLUENCER VIDEOS: duo -->
+  <div class="cs-video-duo">
+    <div class="cs-video-cell">
+      <video autoplay muted loop playsinline>
+        <source src="images/205601 - EBS - Influencer- Ruth - Square - Animated Type_FA.mp4" type="video/mp4">
+      </video>
+      <span class="cs-video-label">Influencer Campaign · Animated Type</span>
+    </div>
+    <div class="cs-video-cell">
+      <video autoplay muted loop playsinline>
+        <source src="images/205601 - EBS - Influencer- Ruth - Square - quote.mp4" type="video/mp4">
+      </video>
+      <span class="cs-video-label">Influencer Campaign · Full Cut</span>
+    </div>
+  </div>
+  <div class="cs-image-caption" style="background: var(--ink); color: rgba(255,255,255,0.35); border-bottom-color: rgba(255,255,255,0.06);">
+    <span>Influencer campaign applying the motion system to longer-form social video.</span>
+    <span>After Effects · Premiere</span>
+  </div>
+
+  <!-- AWARDS -->
+  <div class="cs-awards reveal">
+    <div class="cs-section-tag">Recognition</div>
+    <div class="cs-awards-grid">
+      <div class="cs-award-item">
+        <span class="cs-award-year">2025</span>
+        <p class="cs-award-name">Best Content Creation Studio</p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+      <div class="cs-award-item">
+        <span class="cs-award-year">2024</span>
+        <p class="cs-award-name">Best Content Creation Studio</p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+      <div class="cs-award-item">
+        <span class="cs-award-year">2023</span>
+        <p class="cs-award-name">Best Content Creation Studio</p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+      <div class="cs-award-item">
+        <span class="cs-award-year">2023</span>
+        <p class="cs-award-name">Best Multi-platform Campaign <span style="opacity:0.6;font-size:0.85em">(In-house)</span></p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+      <div class="cs-award-item">
+        <span class="cs-award-year">2022</span>
+        <p class="cs-award-name">Best Instagram Brand</p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+      <div class="cs-award-item">
+        <span class="cs-award-year">2021</span>
+        <p class="cs-award-name">Best Instagram Brand</p>
+        <span class="cs-award-body">Social Media Awards</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="cs-quote reveal">
+    <blockquote>"The brief was to make EBS feel alive online. The answer was already in the letterforms."</blockquote>
+    <cite>Katie Flynn, Designer</cite>
+  </div>
+
+  <!-- OUTCOMES -->
+  <div class="cs-outcomes">
+    <div class="cs-outcome reveal">
+      <div class="cs-outcome-num">3<span class="cs-outcome-suffix">×</span></div>
+      <p class="cs-outcome-label">Faster content production. From 2 hours to under 30 minutes per post.</p>
+    </div>
+    <div class="cs-outcome reveal reveal-d1">
+      <div class="cs-outcome-num">200<span class="cs-outcome-suffix">+</span></div>
+      <p class="cs-outcome-label">Posts produced in the first six months using the system.</p>
+    </div>
+    <div class="cs-outcome reveal reveal-d2">
+      <div class="cs-outcome-num">6<span class="cs-outcome-suffix">×</span></div>
+      <p class="cs-outcome-label">Award wins across five years. Best Instagram Brand 2021 and 2022.</p>
+    </div>
+  </div>
+
+  <!-- NEXT PROJECT -->
+  <div class="cs-next">
+    <div class="cs-next-left reveal">
+      <div>
+        <p class="cs-next-label">Next Case Study</p>
+        <h2 class="cs-next-title">Daily<br>Divination</h2>
+        <a href="daily-divination.html" class="cs-next-link">View project →</a>
+      </div>
+    </div>
+    <div class="cs-next-right reveal reveal-d1">
+      <p>A unified spiritual wellness platform built from scratch. Full design system, AstroJS front-end, and every decision documented.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Katie Flynn · Dublin, Ireland</p>
+    <p id="live-time"></p>
+    <p>katieflynndesign.com</p>
+  </footer>
+
+  <script>
+    document.body.classList.add('js-ready');
+
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    const timeEl = document.getElementById('live-time');
+    function tick() {
+      timeEl.textContent = 'Dublin · ' + new Date().toLocaleTimeString('en-IE', {
+        timeZone: 'Europe/Dublin', hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+    }
+    tick(); setInterval(tick, 1000);
+  </script>
+
+</body>
+</html>
